@@ -12,7 +12,7 @@ Not using PEAR? Not a problem. Download the [source](https://github.com/mybuildi
 
 ## Sample Code
 
-### Making a Call
+### Remove all residents in a unit
 
 ```php
 require "Services/MyBuilding.php";
@@ -30,5 +30,25 @@ try {
 	exit;
 }
 ```
+
+### Adding a resident and sending an email invitation
+
+```php
+require "Services/MyBuilding.php";
+
+$base_url = 'api.mybuilding.org';
+$app_id = "ACXXXXXX"; // Your mybuilding app id
+$app_key = "YYYYYY"; // Your mybuilding app key
+
+$client = new Services_MyBuilding($base_url, $app_id, $app_key)
+
+try {
+	$response = $residentsClient->residents->add(array('communityId' => 32, 'unit' => '1A', 'firstName' => 'Happy', 'lastName' => 'Penguin', 'emailAddress' => 'happy_p@mybuilding.org', 'sendInvitation' => 'Y));
+} catch (Services_MyBuilding_RestException $e) {
+	echo 'error archiving unit = ' . $e->getMessage();
+	exit;
+}
+```
+
 
 
