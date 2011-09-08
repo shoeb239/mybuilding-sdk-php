@@ -7,7 +7,7 @@ class ResidentTest extends PHPUnit_Framework_TestCase {
         m::close();
     }
     
-    function testNeedsRefining() {
+    function testlistResidents() {
         $http = m::mock(new Services_MyBuilding_TinyHttp);
         
         $mockup = array(
@@ -27,9 +27,7 @@ class ResidentTest extends PHPUnit_Framework_TestCase {
         $http->shouldReceive('get')->once()
             ->with('/residents/list?communityId=999&unit=111&format=json&app_id=123&app_key=456')
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
-                json_encode($mockup
-                                
-                )
+                json_encode($mockup)
             ));
             
         $client = new Services_MyBuilding('AC123', '123', '456', $http);
@@ -42,5 +40,29 @@ class ResidentTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('Penguin', $resident->lastName);
 		$this->assertEquals('happy_p@mybuilding.org', $resident->emailAddress);
     }
+    
+    
+  function testAddResident() {
+        $http = m::mock(new Services_MyBuilding_TinyHttp);
+        
+        $mockup = array(
+       		'response' => array(
+        	),
+        	'status' => 'success'
+        );
+        
+        $mockup['response']['residentId'] = '140027_1';
+
+        $http->shouldReceive('post')->once()
+            ->with('/residents/add', m::any(), 'communityId=999&unit=111&firstName=Happy&lastName=Penguin&emailAddress=happy_p%40mybuilding.org&format=json&app_id=123&app_key=456')
+            ->andReturn(array(200, array('Content-Type' => 'application/json'),
+                json_encode($mockup)
+            ));
+            
+        $client = new Services_MyBuilding('AC123', '123', '456', $http);
+        $response = $client->residents->add(array('communityId' => '999', 'unit' => '111', 'firstName' => 'Happy', 'lastName' => 'Penguin', 'emailAddress' => 'happy_p@mybuilding.org'));
+
+  		$this->assertEquals('140027_1', $response->residentId);
+  }
     
 }
