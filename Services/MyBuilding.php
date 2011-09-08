@@ -1,7 +1,7 @@
 <?php
 
 function Services_MyBuilding_autoload($className) {
-    if (substr($className, 0, 15) != 'Services_MyBuilding') {
+    if (substr($className, 0, 19) != 'Services_MyBuilding') {
         return false;
     }
     $file = str_replace('_', '/', $className);
@@ -21,13 +21,14 @@ spl_autoload_register('Services_MyBuilding_autoload');
  */
 class Services_MyBuilding extends Services_MyBuilding_Resource
 {
-    const USER_AGENT = 'mybuilding-php/1.0.0';
+    const USER_AGENT = 'mybuilding-php/1.0.2';
 
     protected $http;
     protected $version;
     
     /**
-     * Enter description here ...
+     * Residents API
+     * 
      * @var Services_MyBuilding_Rest_Residents
      */
     public $residents;
