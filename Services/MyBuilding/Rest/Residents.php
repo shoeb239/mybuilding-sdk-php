@@ -13,7 +13,8 @@ class Services_MyBuilding_Rest_Residents extends Services_MyBuilding_Resource
 	public function listAll($communityId, $unit) {
 		$params = array('communityId' => $communityId, 'unit' => $unit);
 		
-		return $this->proxy->retrieveData("residents/list", $params);
+		$response = $this->proxy->retrieveData("residents/list", $params);
+		return $response->residents->resident;
 	}
 	
 	/**
@@ -31,25 +32,49 @@ class Services_MyBuilding_Rest_Residents extends Services_MyBuilding_Resource
 	
 	
 	/**
-	 * remove (reset) all residents in a unit
+	 * moveout (reset) all residents in a unit
 	 * 
 	 * @param int $communityId
 	 * @param string $unit
 	 */	
-	public function remove($communityId, $unit) {
+	public function moveout($communityId, $unit) {
 		$params = array('communityId' => $communityId, 'unit' => $unit);
 				
 		return $this->proxy->retrieveData("residents/remove", $params);
 	}
 
 	/**
-	 * remove (reset) all residents in a unit
+	 * move out (reset) all residents in a unit
 	 * 
 	 * @param string $corporateCommunityId
 	 * @param string $corporateUnitId
 	 */
-	public function removeByCorporate($corporateCommunityId, $corporateUnitId) {
+	public function moveoutByCorporate($corporateCommunityId, $corporateUnitId) {
 		$params = array('corporateCommunityId' => $corporateCommunityId, 'corporateUnitId' => $corporateUnitId);
+		
+		return $this->proxy->retrieveData("residents/remove", $params);
+	}
+	
+	/**
+	 * remove a single resident
+	 * 
+	 * @param int $communityId
+	 * @param string $residentId
+	 */	
+	public function remove($communityId, $residentId) {
+		$params = array('communityId' => $communityId, 'residentId' => $residentId);
+				
+		return $this->proxy->retrieveData("residents/remove", $params);
+	}
+
+	/**
+	 * remove a single resident
+	 * 
+	 * @param string $corporateCommunityId
+	 * @param string $corporateTenantId
+	 */
+	public function removeByCorporate($corporateCommunityId, $corporateTenantId) {
+		$params = array('corporateCommunityId' => $corporateCommunityId, 'corporateTenantId' => $corporateTenantId);
 		
 		return $this->proxy->retrieveData("residents/remove", $params);
 	}
