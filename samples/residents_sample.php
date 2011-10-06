@@ -15,38 +15,17 @@ require_once 'MyBuilding.php';
 
 unset($root, $library, $path);
 
-// Stage
 $base_url = 'api.mybuilding.org';
 $app_id = 'ABC';
 $app_key = '1234';
 
 
-$client = new Services_MyBuilding($base_url, $app_id, $app_key);
-$communityId = 1;
+$client = new Services_MyBuilding($base_url, $app_id, $app_key)
 
-$row = 0;
-if (($handle = fopen("samples/csv_mass_invite.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, null, ",")) !== FALSE) {
-	    if ($row==0) {
-			$row++;
-	    	continue;
-	    }
-	
-	    $unit = $data[0];
-	    $firstName = $data[1];
-	    $lastName = $data[2];
-	    $email = $data[3];
-	    
-	    try {
-	    	$residentId = $client->residents->add(array('communityId' => $communityId, 'unit' => $unit, 'firstName' => $firstName, 'lastName' => $lastName, 'emailAddress' => $email, 'sendInvitation' => 'Y'));
-	    	echo $email . ' was invited to ' . $unit . " - Resident ID (" . $residentId . ")\n";
-	    } catch (Services_MyBuilding_RestException $e) {
-	    	echo $email . ' not invited to ' . $unit . ' - ' . $e->getMessage() . "\n";	
-	    }
-	    
-	    $row++;
-	}
-    
-   
-    fclose($handle);
+try {
+	// reset an entire unit (removes all the residents, invites & access requests)
+	$response = $residentsClient->residents->remove(32, '1A');
+} catch (Services_MyBuilding_RestException $e) {
+	echo 'error archiving unit = ' . $e->getMessage();
+	exit;
 }
