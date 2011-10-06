@@ -9,6 +9,8 @@
 
 Not using PEAR? Not a problem. Download the [source](https://github.com/mybuilding/mybuilding-sdk-php/zipball/master) which includes all dependencies.
 
+## Sample Scripts
+- csv_mass_invite.php - sending a mass invite using a CSV file
 
 ## Sample Code
 
