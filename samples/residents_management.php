@@ -20,12 +20,11 @@ $app_id = 'ABC';
 $app_key = '1234';
 
 
-$client = new Services_MyBuilding($base_url, $app_id, $app_key)
+$client = new Services_MyBuilding($base_url, $app_id, $app_key);
 
 try {
 	// reset an entire unit (removes all the residents, invites & access requests)
 	$response = $residentsClient->residents->remove(32, '1A');
 } catch (Services_MyBuilding_RestException $e) {
 	echo 'error archiving unit = ' . $e->getMessage();
-	exit;
 }
