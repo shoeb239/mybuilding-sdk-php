@@ -22,9 +22,18 @@ $app_key = '1234';
 
 $client = new Services_MyBuilding($base_url, $app_id, $app_key);
 
+// transfer a resident to a new unit based on corporate IDs
+try {
+	$response = $client->residents->transferByCorporate('NC', 'RESIDENT-40', 'UNIT-59');
+
+} catch (Services_MyBuilding_RestException $e) {
+	echo 'error transfering resident = ' . $e->getMessage();
+	exit;
+}
+
 try {
 	// reset an entire unit (removes all the residents, invites & access requests)
-	$response = $residentsClient->residents->remove(32, '1A');
+	$response = $client->residents->remove(32, '1A');
 } catch (Services_MyBuilding_RestException $e) {
 	echo 'error archiving unit = ' . $e->getMessage();
 }
