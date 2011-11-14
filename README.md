@@ -9,6 +9,10 @@
 
 Not using PEAR? Not a problem. Download the [source](https://github.com/mybuilding/mybuilding-sdk-php/zipball/master) which includes all dependencies.
 
+## Sample Scripts
+- csv_mass_invite.php - sending a mass invite using a CSV file
+- key_log.php - send key transactions
+- residents_management.php - actions on residents, such as reset a unit, add resident, update contact information
 
 ## Sample Code
 

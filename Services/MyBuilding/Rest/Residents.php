@@ -32,6 +32,32 @@ class Services_MyBuilding_Rest_Residents extends Services_MyBuilding_Resource
 	
 	
 	/**
+	 * transfer a resident to a different unit
+	 *
+	 * @param int $communityId
+	 * @param int $residentId
+	 * @param string $unit
+	 */
+	public function transfer($communityId, $residentId, $unit) {
+		$params = array('communityId' => $communityId, 'residentId' => $residentId, 'unit' => $unit);
+	
+		return $this->proxy->retrieveData("residents/transfer", $params);
+	}
+	
+	/**
+	 * transfer a resident to a different unit
+	 *
+	 * @param string $corporateCommunityId
+	 * @param string $corporateTenantId
+	 * @param string $corporateUnitId
+	 */
+	public function transferByCorporate($corporateCommunityId, $corporateTenantId, $corporateUnitId) {
+		$params = array('corporateCommunityId' => $corporateCommunityId, 'corporateTenantId' => $corporateTenantId, 'corporateUnitId' => $corporateUnitId);
+	
+		return $this->proxy->createData("residents/transfer", $params);
+	}
+	
+	/**
 	 * moveout (reset) all residents in a unit
 	 * 
 	 * @param int $communityId
