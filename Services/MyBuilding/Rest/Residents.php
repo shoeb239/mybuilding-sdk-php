@@ -38,7 +38,7 @@ class Services_MyBuilding_Rest_Residents extends Services_MyBuilding_Resource
 	 * @param int $residentId
 	 * @param string $unit
 	 */
-	public function transfer($communityId, $residentId, $unit) {
+	public function transferResident($communityId, $residentId, $unit) {
 		$params = array('communityId' => $communityId, 'residentId' => $residentId, 'unit' => $unit);
 	
 		return $this->proxy->retrieveData("residents/transfer", $params);
@@ -51,7 +51,7 @@ class Services_MyBuilding_Rest_Residents extends Services_MyBuilding_Resource
 	 * @param string $corporateTenantId
 	 * @param string $corporateUnitId
 	 */
-	public function transferByCorporate($corporateCommunityId, $corporateTenantId, $corporateUnitId) {
+	public function transferResidentByCorporate($corporateCommunityId, $corporateTenantId, $corporateUnitId) {
 		$params = array('corporateCommunityId' => $corporateCommunityId, 'corporateTenantId' => $corporateTenantId, 'corporateUnitId' => $corporateUnitId);
 	
 		return $this->proxy->createData("residents/transfer", $params);
@@ -122,4 +122,13 @@ class Services_MyBuilding_Rest_Residents extends Services_MyBuilding_Resource
 	public function update($params) {
 		return $this->proxy->createData("residents/update", $params);
 	}	
+	
+	/**
+	 * transfer a resident
+	 *
+	 * @param array $params
+	 */
+	public function transfer($params) {
+		return $this->proxy->createData("residents/transfer", $params);
+	}
 }
