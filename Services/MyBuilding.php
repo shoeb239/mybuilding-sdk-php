@@ -132,6 +132,7 @@ class Services_MyBuilding extends Services_MyBuilding_Resource
         }
         switch ($headers['Content-Type']) {
         case 'application/json':
+        case 'text/json':
         	return $this->_processJsonResponse($status, $headers, $body);
             break;
         case 'text/xml':
