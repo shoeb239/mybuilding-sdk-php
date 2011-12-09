@@ -33,6 +33,13 @@ class Services_MyBuilding extends Services_MyBuilding_Resource
      */
     public $residents;
     
+    /**
+     * Service Requests API
+     * 
+     * @var Services_MyBuilding_Rest_ServiceRequests
+     */
+    public $serviceRequests;
+	 
    	/**
 	 * app id
 	 * @var string
@@ -72,6 +79,7 @@ class Services_MyBuilding extends Services_MyBuilding_Resource
         $this->http = $_http;
         
         $this->residents = new Services_MyBuilding_Rest_Residents($this);
+        $this->serviceRequests = new Services_MyBuilding_Rest_ServiceRequests($this);
     }
 
     /**
