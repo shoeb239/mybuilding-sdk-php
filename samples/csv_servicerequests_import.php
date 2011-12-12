@@ -20,12 +20,13 @@ unset($root, $library, $path);
 $base_url = 'api.mybuilding.org';
 $app_id = 'ABC';
 $app_key = '1234';
+$communityId = '10';
+
 
 $client = new Services_MyBuilding($base_url, $app_id, $app_key);
-$communityId = 7;
 
 $row = 0;
-if (($handle = fopen("csv_mass_service_request.csv", "r")) !== FALSE) {
+if (($handle = fopen("samples/csv_servicerequests_import.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, null, ",")) !== FALSE) {
 	    if ($row==0) {
 			$row++;
@@ -43,7 +44,6 @@ if (($handle = fopen("csv_mass_service_request.csv", "r")) !== FALSE) {
 	    try {
 	    	$response = $client->serviceRequests->add(array('communityId' => $communityId, 
 			                                                 'unit'        => $unit, 
-															 'requestId'   => $requestId, 
 															 'status'      => $status, 
 															 'category'    => $category, 
 															 'description' => $description,
@@ -51,9 +51,9 @@ if (($handle = fopen("csv_mass_service_request.csv", "r")) !== FALSE) {
 															 'submit_time' => $submit_time));
 															 
 			$requestId = isset($response->requestId) ? $response->requestId : '';										 
-	    	echo 'Service Request was added to ' . $unit . " - Request ID (" . $requestId . ")<br />";
+	    	echo 'Service request was imported to ' . $unit . " - Request ID (" . $requestId . ")" . "\n";;
 	    } catch (Services_MyBuilding_RestException $e) {
-	    	echo 'Service Request was not added to ' . $unit . ' - ' . $e->getMessage() . "<br />";	
+	    	echo 'Service Request was not imported to ' . $unit . ' - ' . $e->getMessage() . "" . "\n";	
 	    }
 	    
 	    $row++;
