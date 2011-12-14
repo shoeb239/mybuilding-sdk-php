@@ -1,3 +1,2 @@
-Unit,RequestId,Status,Category,Description,Permission,Submit Time
-101,,In Progress,Window,This is first csv test,Yes,
-4A,,,Door,This is second test,,
+Unit,Number,Status,Category,Description,Permission,Submit Time
+2A,,In Progress,Window,This is CSV test,Yes,

@@ -33,7 +33,7 @@ if (($handle = fopen("csv_mass_service_request.csv", "r")) !== FALSE) {
 	    }
 	
 	    $unit = $data[0];
-	    $requestId = $data[1];
+	    $number = $data[1];
 	    $status = $data[2];
 	    $category = $data[3];
 	    $description = $data[4];
@@ -43,7 +43,7 @@ if (($handle = fopen("csv_mass_service_request.csv", "r")) !== FALSE) {
 	    try {
 	    	$response = $client->serviceRequests->add(array('communityId' => $communityId, 
 			                                                 'unit'        => $unit, 
-															 'requestId'   => $requestId, 
+															 'number'      => $number, 
 															 'status'      => $status, 
 															 'category'    => $category, 
 															 'description' => $description,
